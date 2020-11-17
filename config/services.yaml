@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    Torr\Umbrella\:
+        resource: ../src/*
+        exclude: ../src/{Exception,UmbrellaBundle.php}

@@ -1,0 +1,3 @@
+umbrella.index:
+    path: /
+    controller: Torr\Umbrella\Controller\UmbrellaController::index

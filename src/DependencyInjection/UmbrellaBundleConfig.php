@@ -17,7 +17,6 @@ final class UmbrellaBundleConfig implements ConfigurationInterface
 		$tree->getRootNode()
 			->children()
 				->scalarNode("templates_directory")
-					->isRequired()
 					->defaultValue("_layout")
 					->info("The path to the layout templates directory. Relative to the project dir.")
 				->end()
