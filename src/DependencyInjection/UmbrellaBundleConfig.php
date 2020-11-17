@@ -25,5 +25,4 @@ final class UmbrellaBundleConfig implements ConfigurationInterface
 
 		return $tree;
 	}
-
 }
