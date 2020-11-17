@@ -14,6 +14,7 @@
 		"php": "^7.4",
 		"21torr/bundle-helpers": "^2.0",
 		"21torr/rad": "^1.0",
+		"symfony/config": "^5.1",
 		"symfony/dependency-injection": "^5.1",
 		"symfony/http-kernel": "^5.1"
 	},
