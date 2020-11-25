@@ -6,3 +6,7 @@ services:
     Torr\Umbrella\:
         resource: ../src/*
         exclude: ../src/{Exception,UmbrellaBundle.php}
+
+    Torr\Umbrella\Component\Library\ComponentLibraryLoader:
+        $templatesDir: '%kernel.project_dir%/templates'
+        $subDir: !abstract 'configuration value: umbrella.templates_directory'
