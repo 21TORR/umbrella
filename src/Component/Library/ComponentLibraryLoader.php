@@ -15,6 +15,7 @@ final class ComponentLibraryLoader
 	private string $baseDir;
 	private UmbrellaTranslator $translator;
 	private ?Stopwatch $stopwatch;
+	private ?ComponentLibrary $library = null;
 
 	public function __construct (
 		UmbrellaTranslator $translator,
@@ -33,6 +34,19 @@ final class ComponentLibraryLoader
 	/**
 	 */
 	public function loadLibrary () : ComponentLibrary
+	{
+		if (null === $this->library)
+		{
+			$this->library = $this->regenerateLibrary();
+		}
+
+		return $this->library;
+	}
+
+
+	/**
+	 */
+	public function regenerateLibrary () : ComponentLibrary
 	{
 		try
 		{
