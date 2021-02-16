@@ -49,7 +49,7 @@ final class ComponentLibraryLoader
 				// 2. specify which types of file names are allowed
 				// 3. the templates must end in ".html.twig"
 				// 4. Only templates exactly one level under the base dir are allowed (so in a single sub dir)
-				->path('~^[a-z0-9][a-z0-9-_]*\/[a-z0-9][a-z0-9-_]*\.html\.twig$~i')
+				->path('~^[a-z0-9][a-z0-9-_]*\/[a-z0-9_][a-z0-9-_]*\.html\.twig$~i')
 			;
 
 			$components = $this->fetchComponentsFromFinder($finder);
@@ -82,13 +82,22 @@ final class ComponentLibraryLoader
 	{
 		$components = [];
 
-		foreach ($finder as $key => $file)
+		foreach ($finder as $file)
 		{
 			$type = \dirname($file->getRelativePathname());
 			$name = \basename($file->getRelativePathname(), ".html.twig");
+			$hidden = false;
+
+			if ($name[0] === "_")
+            {
+                $name = \substr($name, 1);
+                $hidden = true;
+            }
+
 			$components[$type][$name] = new ComponentData(
 				$name,
-				$this->translator->translateComponent($type, $name)
+				$this->translator->translateComponent($type, $name),
+                $hidden
 			);
 		}
 

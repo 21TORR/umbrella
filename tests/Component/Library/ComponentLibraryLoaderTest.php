@@ -41,12 +41,32 @@ final class ComponentLibraryLoaderTest extends TestCase
 			$simplifiedResult[$typeKey] = \array_keys($type->getComponents());
 		}
 
+		// expected types and components with their "hidden" value
+		$expected = [
+            "atom" => [
+                "test" => false,
+                "hidden" => true,
+            ],
+            "test" => [
+                "example" => false,
+                "example2" => false,
+            ],
+        ];
+
 		self::assertEqualsCanonicalizing(
-			[
-				"atom" => ["test"],
-				"test" => ["example", "example2"],
-			],
+		    \array_map(
+		        static fn ($items) => \array_keys($items),
+                $expected
+            ),
 			$simplifiedResult
 		);
+
+        foreach ($components as $typeKey => $type)
+        {
+            foreach ($type->getComponents() as $component)
+            {
+                self::assertSame($expected[$typeKey][$component->getKey()], $component->isHidden());
+            }
+        }
 	}
 }
