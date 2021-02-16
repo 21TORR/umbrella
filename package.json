@@ -1,0 +1,13 @@
+{
+	"private": true,
+	"dependencies": {
+		"@21torr/firefly": "^1.2.5"
+	},
+	"scripts": {
+		"build": "firefly release",
+		"dev": "firefly dev"
+	},
+	"devDependencies": {
+		"core-js": "^3.8.0"
+	}
+}

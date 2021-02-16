@@ -1,7 +1,9 @@
 /.editorconfig
 /.php_cs.cache
 /.phpunit.result.cache
+/.stylelintcache
 /composer.lock
+/node_modules
 /vendor
 /vendor-bin/*/composer.lock
 /vendor-bin/*/vendor

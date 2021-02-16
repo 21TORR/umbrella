@@ -11,18 +11,20 @@
 		}
 	],
 	"require": {
-		"php": "^7.4",
+		"php": "^7.4 || ^8.0",
 		"21torr/bundle-helpers": "^2.0",
 		"21torr/rad": "^1.0",
 		"symfony/config": "^5.1",
 		"symfony/dependency-injection": "^5.1",
 		"symfony/finder": "^5.1",
-		"symfony/http-kernel": "^5.1"
+		"symfony/http-kernel": "^5.1",
+		"symfony/translation-contracts": "^2.3"
 	},
 	"require-dev": {
 		"bamarni/composer-bin-plugin": "^1.4",
 		"roave/security-advisories": "dev-master",
-		"symfony/phpunit-bridge": "^5.1"
+		"symfony/phpunit-bridge": "^5.1",
+		"symfony/stopwatch": "^5.1"
 	},
 	"config": {
 		"sort-packages": true

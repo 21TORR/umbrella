@@ -4,11 +4,48 @@ namespace Torr\Umbrella\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Torr\Rad\Controller\BaseController;
+use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 
 final class UmbrellaController extends BaseController
 {
-	public function index () : Response
+	public function index (ComponentLibraryLoader $libraryLoader) : Response
 	{
-		return $this->render("@Umbrella/index.html.twig");
+		$library = $libraryLoader->loadLibrary();
+		$categories = $library->getCategories();
+
+		return $this->render("@Umbrella/index.html.twig", [
+			"categories" => $categories,
+		]);
+	}
+
+	public function component (
+		ComponentLibraryLoader $libraryLoader,
+		string $category,
+		string $key
+	) : Response
+	{
+		$categoryData = $libraryLoader->loadLibrary()->getCategory($category);
+		$component = $categoryData->getComponent($key);
+
+		return $this->render("@Umbrella/component.html.twig", [
+			"category" => $categoryData,
+			"component" => $component,
+		]);
+	}
+
+	public function preview (
+		ComponentLibraryLoader $libraryLoader,
+		string $category,
+		string $key
+	) : Response
+	{
+		$categoryData = $libraryLoader->loadLibrary()->getCategory($category);
+		$component = $categoryData->getComponent($key);
+
+		return $this->render("@Umbrella/preview.html.twig", [
+			"category" => $categoryData,
+			"component" => $component,
+			"html" => "",
+		]);
 	}
 }
