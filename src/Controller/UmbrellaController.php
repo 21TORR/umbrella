@@ -33,19 +33,28 @@ final class UmbrellaController extends BaseController
 		]);
 	}
 
+
+	/**
+	 */
 	public function preview (
 		ComponentLibraryLoader $libraryLoader,
 		string $category,
 		string $key
 	) : Response
 	{
-		$categoryData = $libraryLoader->loadLibrary()->getCategory($category);
+		$library = $libraryLoader->loadLibrary();
+		$categoryData = $library->getCategory($category);
 		$component = $categoryData->getComponent($key);
+
+		if ($component->isHidden())
+		{
+			throw $this->createNotFoundException("Component is hidden");
+		}
 
 		return $this->render("@Umbrella/preview.html.twig", [
 			"category" => $categoryData,
 			"component" => $component,
-			"html" => "",
+			"html" => $this->renderView($library->getTemplatePath($categoryData, $component)),
 		]);
 	}
 }
