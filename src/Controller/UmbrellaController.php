@@ -8,6 +8,8 @@ use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 
 final class UmbrellaController extends BaseController
 {
+	/**
+	 */
 	public function index (ComponentLibraryLoader $libraryLoader) : Response
 	{
 		$library = $libraryLoader->loadLibrary();
@@ -18,6 +20,8 @@ final class UmbrellaController extends BaseController
 		]);
 	}
 
+	/**
+	 */
 	public function component (
 		ComponentLibraryLoader $libraryLoader,
 		string $category,
@@ -26,6 +30,11 @@ final class UmbrellaController extends BaseController
 	{
 		$categoryData = $libraryLoader->loadLibrary()->getCategory($category);
 		$component = $categoryData->getComponent($key);
+
+		if ($component->isHidden())
+        {
+            throw $this->createNotFoundException("Component is hidden");
+        }
 
 		return $this->render("@Umbrella/component.html.twig", [
 			"category" => $categoryData,
