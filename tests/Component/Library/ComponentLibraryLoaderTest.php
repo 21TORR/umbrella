@@ -45,7 +45,7 @@ final class ComponentLibraryLoaderTest extends TestCase
 		$expected = [
             "atom" => [
                 "test" => false,
-                "hidden" => true,
+                "_hidden" => true,
             ],
             "test" => [
                 "example" => false,

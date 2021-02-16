@@ -102,18 +102,11 @@ final class ComponentLibraryLoader
 		{
 			$type = \dirname($file->getRelativePathname());
 			$name = \basename($file->getRelativePathname(), ".html.twig");
-			$hidden = false;
-
-			if ($name[0] === "_")
-            {
-                $name = \substr($name, 1);
-                $hidden = true;
-            }
 
 			$components[$type][$name] = new ComponentData(
 				$name,
 				$this->translator->translateComponent($type, $name),
-                $hidden
+				("_" === $name[0])
 			);
 		}
 

@@ -54,11 +54,23 @@ final class CategoryData
 		{
 			throw new MissingComponentException(\sprintf(
 				"Can't find component '%s' in category '%s'",
-				$component,
+				$key,
 				$this->key
 			));
 		}
 
 		return $component;
+	}
+
+
+	/**
+	 * @return ComponentData[]
+	 */
+	public function getVisibleComponents () : array
+	{
+		return \array_filter(
+			$this->components,
+			static fn (ComponentData $componentData) => !$componentData->isHidden()
+		);
 	}
 }
