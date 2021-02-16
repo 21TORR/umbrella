@@ -1,22 +1,5 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport"
-			  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>☂️ Hello! • Umbrella</title>
-	</head>
-	<body>
-		<h1>Umbrella</h1>
+{% extends "@Umbrella/base.html.twig" %}
 
-		{% for category in categories %}
-			<h1>{{ category.label }}</h1>
-			<ul>
-				{% for component in category.components %}
-					<li><a href="{{ path("umbrella.component", {category: category.key, key: component.key}) }}">{{ component.label }}</a></li>
-				{% endfor %}
-			</ul>
-		{% endfor %}
-	</body>
-</html>
+{%- block content -%}
+	<h1>Hello there!</h1>
+{%- endblock -%}

@@ -5,6 +5,7 @@ namespace Torr\Umbrella\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Torr\Rad\Controller\BaseController;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
+use Torr\Umbrella\Data\ComponentData;
 
 final class UmbrellaController extends BaseController
 {
@@ -28,7 +29,8 @@ final class UmbrellaController extends BaseController
 		string $key
 	) : Response
 	{
-		$categoryData = $libraryLoader->loadLibrary()->getCategory($category);
+		$library = $libraryLoader->loadLibrary();
+		$categoryData = $library->getCategory($category);
 		$component = $categoryData->getComponent($key);
 
 		if ($component->isHidden())
@@ -39,6 +41,7 @@ final class UmbrellaController extends BaseController
 		return $this->render("@Umbrella/component.html.twig", [
 			"category" => $categoryData,
 			"component" => $component,
+			"categories" => $library->getCategories(),
 		]);
 	}
 
@@ -64,6 +67,22 @@ final class UmbrellaController extends BaseController
 			"category" => $categoryData,
 			"component" => $component,
 			"html" => $this->renderView($library->getTemplatePath($categoryData, $component)),
+		]);
+	}
+
+	/**
+	 * Renders the navigation
+	 */
+	public function navigation (
+		ComponentLibraryLoader $libraryLoader,
+		?ComponentData $currentComponent
+	) : Response
+	{
+		$library = $libraryLoader->loadLibrary();
+
+		return $this->render("@Umbrella/navigation/navigation.html.twig", [
+			"categories" => $library->getCategories(),
+			"currentComponent" => $currentComponent,
 		]);
 	}
 }
