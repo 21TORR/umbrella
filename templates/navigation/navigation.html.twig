@@ -1,0 +1,10 @@
+{% for category in categories %}
+	<h1>{{ category.label }}</h1>
+	<ul>
+		{% for component in category.visibleComponents %}
+			<li>
+				<a class="{{ component is same as (currentComponent) ? "is-selected" }}" href="{{ path("umbrella.component", {category: category.key, key: component.key}) }}">{{ component.label }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endfor %}

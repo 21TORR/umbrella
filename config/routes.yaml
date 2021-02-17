@@ -1,0 +1,17 @@
+umbrella.index:
+    path: /
+    controller: Torr\Umbrella\Controller\UmbrellaController::index
+
+umbrella.component:
+    path: /{category}/{key}
+    controller: Torr\Umbrella\Controller\UmbrellaController::component
+    requirements:
+        category: '[a-z0-9][a-z0-9-_]*'
+        key: '[a-z0-9][a-z0-9-_]*'
+
+umbrella.preview:
+    path: /_preview/{category}/{key}
+    controller: Torr\Umbrella\Controller\UmbrellaController::preview
+    requirements:
+        category: '[a-z0-9][a-z0-9-_]*'
+        key: '[a-z0-9][a-z0-9-_]*'

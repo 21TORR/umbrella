@@ -1,0 +1,9 @@
+category:
+    atom: Atome
+    molecule: Moleküle
+    organism: Organismen
+
+
+component:
+    atom:
+        test: Test 123

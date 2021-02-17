@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    Torr\Umbrella\:
+        resource: ../src/*
+        exclude: ../src/{Data,Exception,UmbrellaBundle.php}
+
+    Torr\Umbrella\Component\Library\ComponentLibraryLoader:
+        $templatesDir: '%kernel.project_dir%/templates'
+        $subDir: !abstract 'configuration value: umbrella.templates_directory'

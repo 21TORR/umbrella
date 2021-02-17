@@ -1,0 +1,5 @@
+{% extends "@Umbrella/base.html.twig" %}
+
+{%- block content -%}
+	<iframe class="site-preview" src="{{ path("umbrella.preview", {category: category.key, key: component.key}) }}"></iframe>
+{%- endblock -%}
