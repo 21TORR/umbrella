@@ -35,9 +35,9 @@ final class UmbrellaController extends BaseController
 		$component = $categoryData->getComponent($key);
 
 		if ($component->isHidden())
-        {
-            throw $this->createNotFoundException("Component is hidden");
-        }
+		{
+			throw $this->createNotFoundException("Component is hidden");
+		}
 
 		return $this->render("@Umbrella/component.html.twig", [
 			"category" => $categoryData,

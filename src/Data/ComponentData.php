@@ -6,16 +6,16 @@ final class ComponentData
 {
 	private string $key;
 	private string $label;
-    private bool $hidden;
+	private bool $hidden;
 
-    /**
+	/**
 	 */
 	public function __construct (string $key, string $label, bool $hidden)
 	{
 		$this->key = $key;
 		$this->label = $label;
-        $this->hidden = $hidden;
-    }
+		$this->hidden = $hidden;
+	}
 
 	/**
 	 */
@@ -31,10 +31,10 @@ final class ComponentData
 		return $this->label;
 	}
 
-    /**
-     */
-    public function isHidden () : bool
-    {
-        return $this->hidden;
-    }
+	/**
+	 */
+	public function isHidden () : bool
+	{
+		return $this->hidden;
+	}
 }

@@ -4,5 +4,4 @@ namespace Torr\Umbrella\Exception;
 
 interface UmbrellaException extends \Throwable
 {
-
 }
