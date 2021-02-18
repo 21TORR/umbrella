@@ -53,7 +53,7 @@ class UmbrellaTranslator
 	private function generateLabel (string $key) : string
 	{
 		$key = \strtr($key, ["-" => " ", "_" => " "]);
-		$key = \preg_replace('~\\s+~', ' ', $key);
+		$key = (string) \preg_replace('~\\s+~', ' ', $key);
 		return \ucfirst($key);
 	}
 }
