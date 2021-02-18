@@ -12,6 +12,7 @@
 	],
 	"require": {
 		"php": "^7.4 || ^8.0",
+		"21torr/assets": "^1.0@dev",
 		"21torr/bundle-helpers": "^2.0",
 		"21torr/html-builder": "^1.0",
 		"21torr/rad": "^1.0",
