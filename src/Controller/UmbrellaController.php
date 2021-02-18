@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Torr\Rad\Controller\BaseController;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Data\ComponentData;
+use Torr\Umbrella\Preview\PreviewManager;
 use Torr\Umbrella\Renderer\ComponentRenderer;
 
 final class UmbrellaController extends BaseController
@@ -52,6 +53,7 @@ final class UmbrellaController extends BaseController
 	public function preview (
 		ComponentLibraryLoader $libraryLoader,
 		ComponentRenderer $componentRenderer,
+		PreviewManager $previewManager,
 		string $category,
 		string $key
 	) : Response
@@ -69,6 +71,7 @@ final class UmbrellaController extends BaseController
 			"category" => $categoryData,
 			"component" => $component,
 			"html" => $componentRenderer->renderStandalone($category, $key),
+			"previewAssets" => $previewManager->getPreviewAssets(),
 		]);
 	}
 

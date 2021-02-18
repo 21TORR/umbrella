@@ -4,6 +4,7 @@
 /.stylelintcache
 /composer.lock
 /node_modules
+/studio.json
 /vendor
 /vendor-bin/*/composer.lock
 /vendor-bin/*/vendor

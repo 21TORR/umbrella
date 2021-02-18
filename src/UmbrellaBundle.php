@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Torr\BundleHelpers\Bundle\ConfigurableBundleExtension;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfig;
+use Torr\Umbrella\Preview\PreviewManager;
 
 final class UmbrellaBundle extends Bundle
 {
@@ -23,6 +24,9 @@ final class UmbrellaBundle extends Bundle
 			{
 				$container->getDefinition(ComponentLibraryLoader::class)
 					->setArgument('$subDir', $config["templates_directory"]);
+
+				$container->getDefinition(PreviewManager::class)
+					->setArgument('$previewAssets', $config["assets"]);
 			}
 		);
 	}
