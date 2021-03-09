@@ -45,6 +45,7 @@ final class UmbrellaController extends BaseController
 			"category" => $categoryData,
 			"component" => $component,
 			"categories" => $library->getCategories(),
+            "docs" => null,
 		]);
 	}
 

@@ -1,10 +1,14 @@
-{% for category in categories %}
-	<h1>{{ category.label }}</h1>
+{%- for category in categories -%}
+	<h1 class="navigation-headline">{{ category.label }}</h1>
 	<ul>
-		{% for component in category.visibleComponents %}
+		{%- for component in category.visibleComponents -%}
 			<li>
-				<a class="{{ component is same as (currentComponent) ? "is-selected" }}" href="{{ path("umbrella.component", {category: category.key, key: component.key}) }}">{{ component.label }}</a>
+			{%- if component is same as (currentComponent) -%}
+				<strong>{{ component.label }}</strong>
+			{%- else -%}
+				<a href="{{ path("umbrella.component", {category: category.key, key: component.key}) }}">{{ component.label }}</a>
+			{%- endif -%}
 			</li>
-		{% endfor %}
+		{%- endfor -%}
 	</ul>
-{% endfor %}
+{%- endfor -%}
