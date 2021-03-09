@@ -2,6 +2,9 @@
 =====
 
 *   (improvement) Add minimal styling.
+*   (feature) Add first draft of docs.
+*   (improvement) Remove profiler in preview.
+
 
 1.0.0
 =====
