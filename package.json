@@ -5,6 +5,7 @@
 		"dev": "firefly dev"
 	},
 	"dependencies": {
+		"@21torr/atlantis": "^0.5.1",
 		"@21torr/firefly": "^1.2.5"
 	},
 	"devDependencies": {
