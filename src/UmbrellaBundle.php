@@ -32,19 +32,19 @@ final class UmbrellaBundle extends Bundle
 		);
 	}
 
-    /**
-     * @inheritDoc
-     */
-    public function build(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new RegisterAssetNamespaceCompilerPass(
-            "umbrella",
-            \dirname(__DIR__) . "/build"
-        ));
-    }
+	/**
+	 * @inheritDoc
+	 */
+	public function build(ContainerBuilder $container) : void
+	{
+		$container->addCompilerPass(new RegisterAssetNamespaceCompilerPass(
+			"umbrella",
+			\dirname(__DIR__) . "/build"
+		));
+	}
 
 
-    /**
+	/**
 	 * @inheritDoc
 	 */
 	public function getPath () : string

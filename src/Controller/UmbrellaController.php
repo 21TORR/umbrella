@@ -45,7 +45,7 @@ final class UmbrellaController extends BaseController
 			"category" => $categoryData,
 			"component" => $component,
 			"categories" => $library->getCategories(),
-            "docs" => null,
+			"docs" => null,
 		]);
 	}
 
@@ -61,10 +61,10 @@ final class UmbrellaController extends BaseController
 		string $key
 	) : Response
 	{
-	    if (null !== $profiler)
-        {
-            $profiler->disable();
-        }
+		if (null !== $profiler)
+		{
+			$profiler->disable();
+		}
 
 		$library = $libraryLoader->loadLibrary();
 		$categoryData = $library->getCategory($category);
