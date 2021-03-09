@@ -1,0 +1,11 @@
+@use "../helper/mixins";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    font-size: 1.6rem;
+}

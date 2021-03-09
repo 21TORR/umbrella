@@ -1,3 +1,16 @@
-a {
-    color: red;
-}
+// Vendor
+@use "~@21torr/atlantis/reset";
+
+// Base
+@use "base/global";
+
+// Atom
+@use "atom/site-docs";
+@use "atom/site-navigation";
+@use "atom/site-preview";
+
+// Molecule
+@use "molecule/site-layout";
+
+// Template
+@use "template/_default";
