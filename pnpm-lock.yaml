@@ -1,9 +1,14 @@
 dependencies:
+  '@21torr/atlantis': 0.5.1
   '@21torr/firefly': 1.2.5_core-js@3.8.0
 devDependencies:
   core-js: 3.8.0
 lockfileVersion: 5.2
 packages:
+  /@21torr/atlantis/0.5.1:
+    dev: false
+    resolution:
+      integrity: sha512-8fNfrGyNqUqwIyAf+1qKa5eP9tOuPHTDMAKqtZ6lZCMrYJMUjdCzoYPkOqjweIa6HGqwl0FSwmVK8TMurVE08w==
   /@21torr/firefly/1.2.5_core-js@3.8.0:
     dependencies:
       '@babel/plugin-proposal-class-properties': 7.12.1
@@ -4816,5 +4821,6 @@ packages:
     resolution:
       integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
 specifiers:
+  '@21torr/atlantis': ^0.5.1
   '@21torr/firefly': ^1.2.5
   core-js: ^3.8.0

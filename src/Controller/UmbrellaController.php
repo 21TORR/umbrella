@@ -3,6 +3,7 @@
 namespace Torr\Umbrella\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Data\ComponentData;
@@ -44,6 +45,7 @@ final class UmbrellaController extends BaseController
 			"category" => $categoryData,
 			"component" => $component,
 			"categories" => $library->getCategories(),
+			"docs" => null,
 		]);
 	}
 
@@ -54,10 +56,16 @@ final class UmbrellaController extends BaseController
 		ComponentLibraryLoader $libraryLoader,
 		ComponentRenderer $componentRenderer,
 		PreviewManager $previewManager,
+		?Profiler $profiler,
 		string $category,
 		string $key
 	) : Response
 	{
+		if (null !== $profiler)
+		{
+			$profiler->disable();
+		}
+
 		$library = $libraryLoader->loadLibrary();
 		$categoryData = $library->getCategory($category);
 		$component = $categoryData->getComponent($key);
