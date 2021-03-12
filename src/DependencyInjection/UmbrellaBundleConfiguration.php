@@ -5,7 +5,7 @@ namespace Torr\Umbrella\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class UmbrellaBundleConfig implements ConfigurationInterface
+final class UmbrellaBundleConfiguration implements ConfigurationInterface
 {
 	/**
 	 * @inheritDoc
@@ -21,9 +21,13 @@ final class UmbrellaBundleConfig implements ConfigurationInterface
 					->info("The path to the layout templates directory. Relative to the project dir.")
 				->end()
 				->arrayNode("assets")
-					->scalarPrototype()
+					->scalarPrototype()->end()
 					->defaultValue([])
 					->info("All the assets that need to be loaded in the previews.")
+				->end()
+				->booleanNode("enabled_in_production")
+					->defaultValue(false)
+					->info("Whether umbrella should be enabled in production.")
 				->end()
 			->end();
 

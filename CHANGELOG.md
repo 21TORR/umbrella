@@ -1,3 +1,9 @@
+0.3.0
+=====
+
+*   (feature) Add option to disable umbrella in production.
+
+
 0.2.0
 =====
 
