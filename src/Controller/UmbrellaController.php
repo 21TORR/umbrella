@@ -6,7 +6,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
+use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\Data\ComponentData;
+use Torr\Umbrella\Exception\UmbrellaDisabledException;
 use Torr\Umbrella\Preview\PreviewManager;
 use Torr\Umbrella\Renderer\ComponentRenderer;
 
@@ -14,8 +16,16 @@ final class UmbrellaController extends BaseController
 {
 	/**
 	 */
-	public function index (ComponentLibraryLoader $libraryLoader) : Response
+	public function index (
+		ComponentLibraryLoader $libraryLoader,
+		UmbrellaConfig $config
+	) : Response
 	{
+		if (!$config->isEnabled())
+		{
+			throw new UmbrellaDisabledException();
+		}
+
 		$library = $libraryLoader->loadLibrary();
 		$categories = $library->getCategories();
 
@@ -28,10 +38,16 @@ final class UmbrellaController extends BaseController
 	 */
 	public function component (
 		ComponentLibraryLoader $libraryLoader,
+		UmbrellaConfig $config,
 		string $category,
 		string $key
 	) : Response
 	{
+		if (!$config->isEnabled())
+		{
+			throw new UmbrellaDisabledException();
+		}
+
 		$library = $libraryLoader->loadLibrary();
 		$categoryData = $library->getCategory($category);
 		$component = $categoryData->getComponent($key);
@@ -56,11 +72,17 @@ final class UmbrellaController extends BaseController
 		ComponentLibraryLoader $libraryLoader,
 		ComponentRenderer $componentRenderer,
 		PreviewManager $previewManager,
+		UmbrellaConfig $config,
 		?Profiler $profiler,
 		string $category,
 		string $key
 	) : Response
 	{
+		if (!$config->isEnabled())
+		{
+			throw new UmbrellaDisabledException();
+		}
+
 		if (null !== $profiler)
 		{
 			$profiler->disable();

@@ -1,4 +1,10 @@
-1.1.0
+0.3.0
+=====
+
+*   (feature) Add option to disable umbrella in production.
+
+
+0.2.0
 =====
 
 *   (improvement) Add minimal styling.
@@ -6,7 +12,7 @@
 *   (improvement) Remove profiler in preview.
 
 
-1.0.0
+0.1.0
 =====
 
 *   Add support for variations via `{{ umbrella_variations() }}`

@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Torr\Assets\Container\RegisterAssetNamespaceCompilerPass;
 use Torr\BundleHelpers\Bundle\ConfigurableBundleExtension;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
-use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfig;
+use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfiguration;
 use Torr\Umbrella\Preview\PreviewManager;
 
 final class UmbrellaBundle extends Bundle
@@ -20,7 +20,7 @@ final class UmbrellaBundle extends Bundle
 	{
 		return new ConfigurableBundleExtension(
 			$this,
-			new UmbrellaBundleConfig(),
+			new UmbrellaBundleConfiguration(),
 			static function (array $config, ContainerBuilder $container) : void
 			{
 				$container->getDefinition(ComponentLibraryLoader::class)
