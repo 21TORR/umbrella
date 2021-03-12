@@ -1,6 +1,7 @@
 0.3.1
 =====
 
+*   (improvement) Require newer `21torr/assets` version.
 *   (bug) Add missing parameter passing.
 
 
