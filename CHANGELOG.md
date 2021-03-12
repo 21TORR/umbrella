@@ -1,3 +1,9 @@
+0.3.1
+=====
+
+*   (bug) Add missing parameter passing.
+
+
 0.3.0
 =====
 

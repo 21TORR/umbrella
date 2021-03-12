@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Torr\Assets\Container\RegisterAssetNamespaceCompilerPass;
 use Torr\BundleHelpers\Bundle\ConfigurableBundleExtension;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
+use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfiguration;
 use Torr\Umbrella\Preview\PreviewManager;
 
@@ -28,6 +29,9 @@ final class UmbrellaBundle extends Bundle
 
 				$container->getDefinition(PreviewManager::class)
 					->setArgument('$previewAssets', $config["assets"]);
+
+				$container->getDefinition(UmbrellaConfig::class)
+					->setArgument('$enabledInProduction', $config["enabled_in_production"]);
 			}
 		);
 	}
