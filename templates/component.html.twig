@@ -1,10 +1,10 @@
 {% extends "@Umbrella/base.html.twig" %}
 
 {%- block content -%}
-	<iframe class="site-preview shadow-sm" src="{{ path("umbrella.preview", {category: category.key, key: component.key}) }}"></iframe>
+	<iframe class="site-preview shadow-sm" src="{{ path("umbrella.preview", {category: component.category.key, key: component.key}) }}"></iframe>
 	{% if docs %}
 		<div class="site-docs content">
-			<h2 class="h2">{{ component.label }}</h2>
+			<h1 class="h1">{{ component.label }}</h1>
 			{{- docs | raw -}}
 		</div>
 	{% endif %}

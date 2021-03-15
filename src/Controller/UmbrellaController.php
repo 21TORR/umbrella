@@ -5,6 +5,7 @@ namespace Torr\Umbrella\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
+use Torr\Umbrella\Component\ComponentMetadata;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\Data\ComponentData;
@@ -39,6 +40,7 @@ final class UmbrellaController extends BaseController
 	public function component (
 		ComponentLibraryLoader $libraryLoader,
 		UmbrellaConfig $config,
+		ComponentMetadata $metadata,
 		string $category,
 		string $key
 	) : Response
@@ -61,7 +63,7 @@ final class UmbrellaController extends BaseController
 			"category" => $categoryData,
 			"component" => $component,
 			"categories" => $library->getCategories(),
-			"docs" => null,
+			"docs" => $metadata->renderDocs($component),
 		]);
 	}
 
@@ -73,6 +75,7 @@ final class UmbrellaController extends BaseController
 		ComponentRenderer $componentRenderer,
 		PreviewManager $previewManager,
 		UmbrellaConfig $config,
+		ComponentMetadata $metadata,
 		?Profiler $profiler,
 		string $category,
 		string $key
@@ -89,19 +92,20 @@ final class UmbrellaController extends BaseController
 		}
 
 		$library = $libraryLoader->loadLibrary();
-		$categoryData = $library->getCategory($category);
-		$component = $categoryData->getComponent($key);
+		$component = $library->getCategory($category)->getComponent($key);
 
 		if ($component->isHidden())
 		{
 			throw $this->createNotFoundException("Component is hidden");
 		}
 
+		$componentConfig = $metadata->getComponentConfig($component);
+
 		return $this->render("@Umbrella/preview.html.twig", [
-			"category" => $categoryData,
 			"component" => $component,
 			"html" => $componentRenderer->renderStandalone($category, $key),
 			"previewAssets" => $previewManager->getPreviewAssets(),
+			"bodyClass" => $componentConfig["body"] ?? null,
 		]);
 	}
 

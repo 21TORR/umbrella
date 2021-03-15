@@ -5,7 +5,7 @@
 		<meta name="viewport"
 			  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>☂️ Preview: {{ component.label }} • {{ category.label }} • Umbrella</title>
+		<title>☂️ Preview: {{ component.label }} • {{ component.category.label }} • Umbrella</title>
 		{{- assets_include(previewAssets) -}}
 		<style>
 			.umbrella-variation + .umbrella-variation {
@@ -13,5 +13,5 @@
 			}
 		</style>
 	</head>
-	<body>{{ html | raw }}</body>
+	<body class="{{ bodyClass }}">{{ html | raw }}</body>
 </html>
