@@ -2,7 +2,7 @@
 
 namespace Torr\Umbrella\Data;
 
-use Torr\Umbrella\Exception\MissingComponentException;
+use Torr\Umbrella\Exception\Component\MissingComponentException;
 
 final class CategoryData
 {
@@ -19,6 +19,11 @@ final class CategoryData
 		$this->key = $key;
 		$this->label = $label;
 		$this->components = $components;
+
+		foreach ($components as $component)
+		{
+			$component->setCategory($this);
+		}
 	}
 
 	/**
