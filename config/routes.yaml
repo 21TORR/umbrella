@@ -10,7 +10,7 @@ umbrella.component:
         key: '[a-z0-9][a-z0-9-_]*'
 
 umbrella.preview:
-    path: /_preview/{category}/{key}
+    path: /_v/{category}/{key}
     controller: Torr\Umbrella\Controller\UmbrellaController::preview
     requirements:
         category: '[a-z0-9][a-z0-9-_]*'
