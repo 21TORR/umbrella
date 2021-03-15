@@ -3,7 +3,6 @@
 namespace Torr\Umbrella\Component\Library;
 
 use Torr\Umbrella\Data\CategoryData;
-use Torr\Umbrella\Data\ComponentData;
 use Torr\Umbrella\Exception\MissingCategoryException;
 
 /**
@@ -12,17 +11,12 @@ final class ComponentLibrary
 {
 	/** @var array<string, CategoryData> */
 	private array $categories;
-	private string $templateDir;
 
 	/**
 	 * @param array<string, CategoryData> $categories
 	 */
-	public function __construct (
-		string $baseDir,
-		array $categories
-	)
+	public function __construct (array $categories)
 	{
-		$this->templateDir = $baseDir;
 		$this->categories = $categories;
 	}
 
@@ -46,13 +40,5 @@ final class ComponentLibrary
 		}
 
 		return $categoryData;
-	}
-
-	/**
-	 * Builds a full template include path
-	 */
-	public function getTemplatePath (CategoryData $categoryData, ComponentData $componentData) : string
-	{
-		return "{$this->templateDir}/{$categoryData->getKey()}/{$componentData->getKey()}.html.twig";
 	}
 }

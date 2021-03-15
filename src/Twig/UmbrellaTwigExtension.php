@@ -2,27 +2,33 @@
 
 namespace Torr\Umbrella\Twig;
 
+use Psr\Container\ContainerInterface;
+use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use Torr\HtmlBuilder\Builder\HtmlBuilder;
 use Torr\HtmlBuilder\Node\HtmlElement;
 use Torr\HtmlBuilder\Text\SafeMarkup;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
+use Torr\Umbrella\Paths\ComponentPaths;
 use Torr\Umbrella\Renderer\ComponentRenderer;
 use Torr\Umbrella\Variations\ContextVariations;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-final class UmbrellaTwigExtension extends AbstractExtension
+final class UmbrellaTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
 {
+	private ContainerInterface $locator;
 	private ComponentRenderer $componentRenderer;
 	private ComponentLibraryLoader $libraryLoader;
 
 	/**
 	 */
 	public function __construct (
+		ContainerInterface $locator,
 		ComponentRenderer $componentRenderer,
 		ComponentLibraryLoader $libraryLoader
 	)
 	{
+		$this->locator = $locator;
 		$this->componentRenderer = $componentRenderer;
 		$this->libraryLoader = $libraryLoader;
 	}
@@ -31,11 +37,12 @@ final class UmbrellaTwigExtension extends AbstractExtension
 	 */
 	public function getUmbrellaTemplate (string $category, string $component) : string
 	{
+		/** @var ComponentPaths $paths */
+		$paths = $this->locator->get(ComponentPaths::class);
 		$library = $this->libraryLoader->loadLibrary();
-		$categoryData = $library->getCategory($category);
-		$componentData = $categoryData->getComponent($component);
+		$componentData = $library->getCategory($category)->getComponent($component);
 
-		return $library->getTemplatePath($categoryData, $componentData);
+		return $paths->getTwigTemplatePath($componentData);
 	}
 
 	/**
@@ -72,6 +79,16 @@ final class UmbrellaTwigExtension extends AbstractExtension
 			new TwigFunction("umbrella", [$this->componentRenderer, "renderEmbedded"], $safeHtml),
 			new TwigFunction("umbrella_template", [$this, "getUmbrellaTemplate"]),
 			new TwigFunction("umbrella_variations", [$this, "renderUmbrellaVariations"], $safeHtml),
+		];
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public static function getSubscribedServices () : array
+	{
+		return [
+			ComponentPaths::class,
 		];
 	}
 }

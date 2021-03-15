@@ -3,19 +3,26 @@
 namespace Torr\Umbrella\Renderer;
 
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
+use Torr\Umbrella\Paths\ComponentPaths;
 use Twig\Environment;
 
 final class ComponentRenderer
 {
 	private ComponentLibraryLoader $libraryLoader;
 	private Environment $twig;
+	private ComponentPaths $paths;
 
 	/**
 	 */
-	public function __construct (ComponentLibraryLoader $libraryLoader, Environment $twig)
+	public function __construct (
+		ComponentLibraryLoader $libraryLoader,
+		Environment $twig,
+		ComponentPaths $paths
+	)
 	{
 		$this->libraryLoader = $libraryLoader;
 		$this->twig = $twig;
+		$this->paths = $paths;
 	}
 
 
@@ -53,11 +60,10 @@ final class ComponentRenderer
 	) : string
 	{
 		$library = $this->libraryLoader->loadLibrary();
-		$categoryData = $library->getCategory($category);
-		$componentData = $categoryData->getComponent($component);
+		$componentData = $library->getCategory($category)->getComponent($component);
 
 		return $this->twig->render(
-			$library->getTemplatePath($categoryData, $componentData),
+			$this->paths->getTwigTemplatePath($componentData),
 			\array_replace($variables, [
 				"standalone" => $standalone,
 			])

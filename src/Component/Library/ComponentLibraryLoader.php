@@ -11,7 +11,6 @@ use Torr\Umbrella\Translator\UmbrellaTranslator;
 
 final class ComponentLibraryLoader
 {
-	private string $templatesDir;
 	private string $baseDir;
 	private UmbrellaTranslator $translator;
 	private ?Stopwatch $stopwatch;
@@ -25,8 +24,7 @@ final class ComponentLibraryLoader
 	)
 	{
 		$this->translator = $translator;
-		$this->templatesDir = \trim($subDir, "/");
-		$this->baseDir = \rtrim($templatesDir, "/") . "/{$this->templatesDir}";
+		$this->baseDir = \rtrim($templatesDir, "/") . "/" . \trim($subDir, "/");
 		$this->stopwatch = $stopwatch;
 	}
 
@@ -75,17 +73,11 @@ final class ComponentLibraryLoader
 				$this->stopwatch->stop("Umbrella: load library");
 			}
 
-			return new ComponentLibrary(
-				$this->templatesDir,
-				$categories
-			);
+			return new ComponentLibrary($categories);
 		}
 		catch (DirectoryNotFoundException $exception)
 		{
-			return new ComponentLibrary(
-				$this->templatesDir,
-				[]
-			);
+			return new ComponentLibrary([]);
 		}
 	}
 
