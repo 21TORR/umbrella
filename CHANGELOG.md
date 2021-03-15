@@ -1,3 +1,11 @@
+1.0.0 (unreleased)
+=====
+
+*   (feature) Added docs for components.
+*   (improvement) Simplified internal implementation.
+*   (feature) Added per-component config (as front matter in docs).
+
+
 0.3.1
 =====
 
