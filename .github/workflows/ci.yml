@@ -18,8 +18,22 @@ jobs:
                 with:
                     args: "--indent-style tab --indent-size 1 --dry-run"
 
+            -   uses: actions/setup-node@v2-beta
+                with:
+                    node-version: '14'
+
+            -   uses: pnpm/action-setup@v1.2.1
+                with:
+                    version: '^5.8.0'
+                    run_install: true
+
             -   name: PHP CS Fixer
                 run: "./vendor/bin/php-cs-fixer fix --diff --config vendor-bin/test/vendor/21torr/php-cs/.php_cs.dist --dry-run --no-interaction"
 
             -   name: PHPStan
                 run: "./vendor/bin/phpstan analyze -c phpstan.neon ."
+
+            -   run: pnpm build
+
+            -   name: Prettify package.json
+                run: npx prettier-package-json --use-tabs --list-different
