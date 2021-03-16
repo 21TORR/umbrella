@@ -9,7 +9,7 @@ use Torr\Umbrella\Docs\ComponentMetadata;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\Data\ComponentData;
-use Torr\Umbrella\Docs\DocsPages;
+use Torr\Umbrella\Docs\GlobalDocs;
 use Torr\Umbrella\Exception\UmbrellaDisabledException;
 use Torr\Umbrella\Preview\PreviewManager;
 use Torr\Umbrella\Renderer\ComponentRenderer;
@@ -117,7 +117,7 @@ final class UmbrellaController extends BaseController
 	 */
 	public function navigation (
 		ComponentLibraryLoader $libraryLoader,
-		DocsPages $docsPages,
+		GlobalDocs $docsPages,
 		?ComponentData $currentComponent
 	) : Response
 	{

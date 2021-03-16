@@ -6,12 +6,12 @@ namespace Torr\Umbrella\Data\Docs;
 final class DocsPage
 {
 	private string $key;
-	private string $label;
+	private string $title;
 
-	public function __construct (string $key, string $label)
+	public function __construct (string $key, string $title)
 	{
 		$this->key = $key;
-		$this->label = $label;
+		$this->title = $title;
 	}
 
 	/**
@@ -23,8 +23,8 @@ final class DocsPage
 
 	/**
 	 */
-	public function getLabel() : string
+	public function getTitle() : string
 	{
-		return $this->label;
+		return $this->title;
 	}
 }
