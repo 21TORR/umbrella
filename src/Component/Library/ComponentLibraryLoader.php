@@ -5,6 +5,7 @@ namespace Torr\Umbrella\Component\Library;
 use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Torr\Umbrella\Cache\ProductionCache;
 use Torr\Umbrella\Data\CategoryData;
 use Torr\Umbrella\Data\ComponentData;
 use Torr\Umbrella\Paths\UmbrellaPaths;
@@ -12,20 +13,24 @@ use Torr\Umbrella\Translator\UmbrellaTranslator;
 
 final class ComponentLibraryLoader
 {
+	private const CACHE_KEY = "21torr.umbrella.components";
 	private UmbrellaTranslator $translator;
 	private ?Stopwatch $stopwatch;
 	private ?ComponentLibrary $library = null;
 	private UmbrellaPaths $paths;
+	private ProductionCache $cache;
 
 	public function __construct (
 		UmbrellaTranslator $translator,
 		UmbrellaPaths $paths,
 		?Stopwatch $stopwatch,
+		ProductionCache $cache
 	)
 	{
 		$this->stopwatch = $stopwatch;
 		$this->translator = $translator;
 		$this->paths = $paths;
+		$this->cache = $cache;
 	}
 
 
@@ -35,7 +40,13 @@ final class ComponentLibraryLoader
 	{
 		if (null === $this->library)
 		{
-			$this->library = $this->regenerateLibrary();
+			$this->library = $this->cache->get(
+				self::CACHE_KEY,
+				function ()
+				{
+					return $this->regenerateLibrary();
+				}
+			);
 		}
 
 		return $this->library;
