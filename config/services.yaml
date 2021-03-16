@@ -2,8 +2,6 @@ services:
     _defaults:
         autoconfigure: true
         autowire: true
-        bind:
-            $projectDir: '%kernel.project_dir%'
 
     Torr\Umbrella\:
         resource: ../src/*
@@ -19,3 +17,6 @@ services:
 
     Torr\Umbrella\Config\UmbrellaConfig:
         $enabledInProduction: !abstract 'configuration value: umbrella.enabled_in_production'
+
+    Torr\Umbrella\Paths\UmbrellaPaths:
+        $templatesPath: '%kernel.project_dir%/templates'

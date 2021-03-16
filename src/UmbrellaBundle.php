@@ -10,7 +10,6 @@ use Torr\BundleHelpers\Bundle\ConfigurableBundleExtension;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfiguration;
-use Torr\Umbrella\Paths\ComponentPaths;
 use Torr\Umbrella\Paths\UmbrellaPaths;
 use Torr\Umbrella\Preview\PreviewManager;
 
@@ -28,9 +27,6 @@ final class UmbrellaBundle extends Bundle
 			{
 				$container->getDefinition(ComponentLibraryLoader::class)
 					->setArgument('$subDir', $config["templates_directory"]);
-
-				$container->getDefinition(ComponentPaths::class)
-					->setArgument('$templatesDir', $config["templates_directory"]);
 
 				$container->getDefinition(PreviewManager::class)
 					->setArgument('$previewAssets', $config["assets"]);

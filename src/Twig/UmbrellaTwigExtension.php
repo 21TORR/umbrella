@@ -2,36 +2,33 @@
 
 namespace Torr\Umbrella\Twig;
 
-use League\CommonMark\MarkdownConverter;
-use Psr\Container\ContainerInterface;
-use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use Torr\HtmlBuilder\Builder\HtmlBuilder;
 use Torr\HtmlBuilder\Node\HtmlElement;
 use Torr\HtmlBuilder\Text\SafeMarkup;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
-use Torr\Umbrella\Paths\ComponentPaths;
+use Torr\Umbrella\Paths\UmbrellaPaths;
 use Torr\Umbrella\Renderer\ComponentRenderer;
 use Torr\Umbrella\Variations\ContextVariations;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-final class UmbrellaTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
+final class UmbrellaTwigExtension extends AbstractExtension
 {
-	private ContainerInterface $locator;
 	private ComponentRenderer $componentRenderer;
 	private ComponentLibraryLoader $libraryLoader;
+	private UmbrellaPaths $paths;
 
 	/**
 	 */
 	public function __construct (
-		ContainerInterface $locator,
 		ComponentRenderer $componentRenderer,
-		ComponentLibraryLoader $libraryLoader
+		ComponentLibraryLoader $libraryLoader,
+		UmbrellaPaths $paths
 	)
 	{
-		$this->locator = $locator;
 		$this->componentRenderer = $componentRenderer;
 		$this->libraryLoader = $libraryLoader;
+		$this->paths = $paths;
 	}
 
 
@@ -56,12 +53,10 @@ final class UmbrellaTwigExtension extends AbstractExtension implements ServiceSu
 	 */
 	public function getUmbrellaTemplate (string $category, string $component) : string
 	{
-		/** @var ComponentPaths $paths */
-		$paths = $this->locator->get(ComponentPaths::class);
 		$library = $this->libraryLoader->loadLibrary();
 		$componentData = $library->getCategory($category)->getComponent($component);
 
-		return $paths->getTwigTemplatePath($componentData);
+		return $this->paths->getTwigTemplatePath($componentData);
 	}
 
 	/**
@@ -128,16 +123,6 @@ final class UmbrellaTwigExtension extends AbstractExtension implements ServiceSu
 			new TwigFunction("umbrella", [$this, "renderComponent"], $renderOptions),
 			new TwigFunction("umbrella_template", [$this, "getUmbrellaTemplate"]),
 			new TwigFunction("umbrella_variations", [$this, "renderUmbrellaVariations"], $renderOptions),
-		];
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public static function getSubscribedServices () : array
-	{
-		return [
-			ComponentPaths::class,
 		];
 	}
 }

@@ -3,29 +3,29 @@
 namespace Torr\Umbrella\Renderer;
 
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
-use Torr\Umbrella\Paths\ComponentPaths;
+use Torr\Umbrella\Paths\UmbrellaPaths;
 use Twig\Environment;
 
 final class ComponentRenderer
 {
 	private ComponentLibraryLoader $libraryLoader;
 	private Environment $twig;
-	private ComponentPaths $paths;
-	private CodeFormatter $indenter;
+	private UmbrellaPaths $paths;
+	private CodeFormatter $formatter;
 
 	/**
 	 */
 	public function __construct (
 		ComponentLibraryLoader $libraryLoader,
 		Environment $twig,
-		ComponentPaths $paths,
-		CodeFormatter $indenter
+		UmbrellaPaths $paths,
+		CodeFormatter $formatter
 	)
 	{
 		$this->libraryLoader = $libraryLoader;
 		$this->twig = $twig;
 		$this->paths = $paths;
-		$this->indenter = $indenter;
+		$this->formatter = $formatter;
 	}
 
 
@@ -62,7 +62,7 @@ final class ComponentRenderer
 	) : string
 	{
 		$html = $this->render($category, $component, true, [], true);
-		return $this->indenter->format($html);
+		return $this->formatter->format($html);
 	}
 
 

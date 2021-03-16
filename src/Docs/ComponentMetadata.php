@@ -9,26 +9,21 @@ use Torr\Umbrella\Data\ComponentData;
 use Torr\Umbrella\Docs\Markdown\MarkdownParser;
 use Torr\Umbrella\Exception\Component\InvalidComponentConfigException;
 use Torr\Umbrella\Exception\Docs\InvalidFrontMatterException;
-use Torr\Umbrella\Paths\ComponentPaths;
-use Twig\Environment as Twig;
-use Twig\Error\LoaderError;
+use Torr\Umbrella\Paths\UmbrellaPaths;
 
 final class ComponentMetadata
 {
-	private ComponentPaths $paths;
-	private Twig $twig;
+	private UmbrellaPaths $paths;
 	private MarkdownParser $markdownParser;
 
 	/**
 	 */
 	public function __construct (
 		MarkdownParser $markdownParser,
-		ComponentPaths $paths,
-		Twig $twig
+		UmbrellaPaths $paths
 	)
 	{
 		$this->paths = $paths;
-		$this->twig = $twig;
 		$this->markdownParser = $markdownParser;
 	}
 
@@ -77,16 +72,13 @@ final class ComponentMetadata
 	 */
 	private function loadDocs (ComponentData $component) : ?string
 	{
-		try {
-			$filePath = $this->paths->getTwigDocsPath($component);
-			$source = $this->twig->getLoader()->getSourceContext($filePath);
+		$filePath = $this->paths->getFullComponentDocsPath($component);
 
-			return $source->getCode();
-		}
-		catch (LoaderError $error)
+		if (!\is_file($filePath) || !\is_readable($filePath))
 		{
 			return null;
 		}
 
+		return \file_get_contents($filePath);
 	}
 }
