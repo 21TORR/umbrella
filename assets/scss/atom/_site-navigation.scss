@@ -3,10 +3,16 @@
 
 .site-navigation {
     .navigation-headline {
+        display: flex;
+        align-items: center;
         font-size: 2rem;
         padding: .5rem 1rem;
         text-transform: uppercase;
         font-weight: 700;
+
+        .icon {
+            margin-right: .5rem;
+        }
     }
 
     * + .navigation-headline {
