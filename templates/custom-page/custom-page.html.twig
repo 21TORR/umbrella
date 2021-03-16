@@ -5,8 +5,8 @@
 {%- block content -%}
 	<div class="site-docs">
 		<h1 class="h1 docs-headline">{{ customPage.title }}</h1>
-		<div class="docs-text content">
-			{{- customPage.render | raw -}}
+		<div class="docs-text">
+			{{- content | raw -}}
 		</div>
 	</div>
 {%- endblock -%}

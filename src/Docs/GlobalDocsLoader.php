@@ -85,7 +85,7 @@ final class GlobalDocsLoader implements CacheClearerInterface
 				);
 			}
 
-			\uksort(
+			\uasort(
 				$pages,
 				static function (DocsPage $left, DocsPage $right)
 				{

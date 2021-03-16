@@ -22,5 +22,5 @@ services:
     Torr\Umbrella\Cache\ProductionCache:
         $isDebug: '%kernel.debug%'
 
-    Torr\Umbrella\Section\CustomPagesRegistry:
+    Torr\Umbrella\CustomPage\CustomPagesRegistry:
         $pages: !tagged_locator { tag: umbrella.custom-page, default_index_method: getKey }
