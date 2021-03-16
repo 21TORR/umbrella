@@ -1,3 +1,30 @@
+@use "../helper/mixins";
+@use "../helper/variables";
+
 .site-docs {
-    padding: 0 30px;
+    $max-width: 140rem;
+    $responsive-margin: 3rem;
+    padding-bottom: 10rem;
+    margin-left: $responsive-margin;
+    margin-right: $responsive-margin;
+
+    .docs-code {
+        margin: 2rem auto 0;
+    }
+
+    .docs-window {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .docs-text {
+        margin-top: 4rem;
+        max-width: 100rem;
+    }
+
+    @include mixins.on-min-width($max-width + 2 * $responsive-margin + variables.$sidebar-width) {
+        max-width: $max-width;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

@@ -1,0 +1,33 @@
+@use "../helper/mixins";
+@use "../helper/placeholders";
+@use "../helper/variables";
+
+.content {
+    /* stylelint-disable selector-max-type */
+    @include mixins.content(2rem);
+
+    h1 {
+        @extend %h1;
+    }
+
+    h2 {
+        @extend %h2;
+    }
+
+    h3 {
+        @extend %h3;
+    }
+
+    h4 {
+        @extend %h4;
+    }
+
+    code {
+        @include mixins.code-font;
+        color: variables.$code;
+        word-wrap: break-word;
+        font-size: .875em;
+    }
+
+    /* stylelint-enable selector-max-type */
+}

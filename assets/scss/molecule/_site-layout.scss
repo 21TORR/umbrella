@@ -1,19 +1,17 @@
+@use "../helper/variables";
+@use "../helper/mixins";
+
 .site-layout {
     display: flex;
     height: 100%;
     width: 100%;
 
     .site-navigation {
-        flex-grow: 0;
-        flex-shrink: 0;
-        min-width: 0;
-        width: 200px;
+        @include mixins.flex-fixed-width(variables.$sidebar-width);
     }
 
     .site-content {
-        flex-grow: 1;
-        flex-shrink: 0;
-        min-width: 0;
+        @include mixins.flex-fixed-width(calc(100% - #{variables.$sidebar-width}));
 
         &.is-index {
             display: flex;

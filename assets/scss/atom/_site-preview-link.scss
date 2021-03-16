@@ -1,0 +1,22 @@
+@use "../helper/mixins";
+@use "../helper/variables";
+
+.site-preview-link {
+    display: flex;
+    justify-content: flex-end;
+
+    a {
+        display: flex;
+        color: variables.$active;
+        align-items: center;
+
+        .icon {
+            margin-right: .5rem;
+        }
+
+        @include mixins.on-interaction {
+            color: variables.$text;
+            text-decoration: underline;
+        }
+    }
+}
