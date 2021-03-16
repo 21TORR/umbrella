@@ -1,0 +1,13 @@
+{% extends "@Umbrella/base.html.twig" %}
+
+{%- trans_default_domain "umbrella" -%}
+
+
+{%- block content -%}
+	<div class="site-docs">
+		<h1 class="h1 docs-headline">{{ docsPage.title }}</h1>
+		<div class="docs-text content">
+			{{- content | raw -}}
+		</div>
+	</div>
+{%- endblock -%}

@@ -12,3 +12,18 @@
 		{%- endfor -%}
 	</ul>
 {%- endfor -%}
+
+{% if docs is not empty %}
+	<h1 class="navigation-headline">{{ "component.section.docs" | trans({}, "umbrella") }}</h1>
+	<ul>
+		{% for doc in docs %}
+			<li>
+				{%- if doc is same as (currentDocsPage) -%}
+					<strong>{{ doc.title }}</strong>
+				{%- else -%}
+					<a href="{{ path("umbrella.docs", {key: doc.key}) }}">{{ doc.title }}</a>
+				{%- endif -%}
+			</li>
+		{%- endfor -%}
+	</ul>
+{% endif %}

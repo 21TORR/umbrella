@@ -6,6 +6,8 @@ category:
 
 
 component:
+    section:
+        docs: Docs
     view:
         open-preview: im neuen Fenster öffnen
     atom:

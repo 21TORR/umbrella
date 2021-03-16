@@ -7,7 +7,11 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>☂️ {{ component is defined and category is defined ? "#{component.label} • #{category.label}" : "Index" -}} • Umbrella</title>
 		{%- block assets -%}
-			{{- assets_include(["@umbrella/css/umbrella.css"]) -}}
+			{{- assets_include([
+				"@umbrella/css/umbrella.css",
+				"@umbrella/vendor/prism.css",
+				"@umbrella/vendor/prism.js",
+			]) -}}
 		{%- endblock -%}
 	</head>
 	<body class="umbrella">
@@ -18,6 +22,7 @@
 			<div class="site-navigation">
 				{{- render(controller("Torr\\Umbrella\\Controller\\UmbrellaController::navigation", {
 					currentComponent: component ?? null,
+					currentDocsPage: docsPage ?? null,
 				})) -}}
 			</div>
 		</div>

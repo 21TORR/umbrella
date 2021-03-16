@@ -5,11 +5,12 @@ namespace Torr\Umbrella\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
+use Torr\Umbrella\Data\Docs\DocsPage;
 use Torr\Umbrella\Docs\ComponentMetadata;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\Data\ComponentData;
-use Torr\Umbrella\Docs\GlobalDocs;
+use Torr\Umbrella\Docs\GlobalDocsLoader;
 use Torr\Umbrella\Exception\UmbrellaDisabledException;
 use Torr\Umbrella\Preview\PreviewManager;
 use Torr\Umbrella\Renderer\ComponentRenderer;
@@ -61,7 +62,7 @@ final class UmbrellaController extends BaseController
 			throw $this->createNotFoundException("Component is hidden");
 		}
 
-		return $this->render("@Umbrella/component.html.twig", [
+		return $this->render("@Umbrella/component/component.html.twig", [
 			"category" => $categoryData,
 			"component" => $component,
 			"categories" => $library->getCategories(),
@@ -104,7 +105,7 @@ final class UmbrellaController extends BaseController
 
 		$componentConfig = $metadata->getComponentConfig($component);
 
-		return $this->render("@Umbrella/preview.html.twig", [
+		return $this->render("@Umbrella/component/preview.html.twig", [
 			"component" => $component,
 			"html" => $componentRenderer->renderStandalone($category, $key),
 			"previewAssets" => $previewManager->getPreviewAssets(),
@@ -117,16 +118,48 @@ final class UmbrellaController extends BaseController
 	 */
 	public function navigation (
 		ComponentLibraryLoader $libraryLoader,
-		GlobalDocs $docsPages,
-		?ComponentData $currentComponent
+		GlobalDocsLoader $docsLoader,
+		?ComponentData $currentComponent,
+		?DocsPage $currentDocsPage
 	) : Response
 	{
 		$library = $libraryLoader->loadLibrary();
-		$docsPages->fetchDocsPages();
 
 		return $this->render("@Umbrella/navigation/navigation.html.twig", [
 			"categories" => $library->getCategories(),
 			"currentComponent" => $currentComponent,
+			"currentDocsPage" => $currentDocsPage,
+			"docs" => $docsLoader->load()->getAll(),
+		]);
+	}
+
+	/**
+	 */
+	public function globalDocs (
+		UmbrellaConfig $config,
+		GlobalDocsLoader $docsLoader,
+		string $key
+	) : Response
+	{
+		if (!$config->isEnabled())
+		{
+			throw new UmbrellaDisabledException();
+		}
+
+		$docs = $docsLoader->load();
+		$page = $docs->get($key);
+
+		if (null === $page)
+		{
+			throw $this->createNotFoundException(\sprintf(
+				"Docs page does not exist with key '%s'",
+				$key
+			));
+		}
+
+		return $this->render("@Umbrella/docs/docs.html.twig", [
+			"docsPage" => $page,
+			"content" => $docsLoader->getRenderedDocsPageContent($page),
 		]);
 	}
 }

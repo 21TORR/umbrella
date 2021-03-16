@@ -2,15 +2,6 @@
 
 {%- trans_default_domain "umbrella" -%}
 
-{%- block assets -%}
-	{{- parent() -}}
-	{{- assets_include([
-		"@umbrella/vendor/prism.css",
-		"@umbrella/vendor/prism.js",
-	]) -}}
-{%- endblock -%}
-
-
 {%- block content -%}
 	<iframe class="site-preview" src="{{ path("umbrella.preview", {category: component.category.key, key: component.key}) }}"></iframe>
 	<div class="site-preview-link">
