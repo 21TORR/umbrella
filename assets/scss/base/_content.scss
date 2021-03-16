@@ -29,5 +29,18 @@
         font-size: .875em;
     }
 
+    a {
+        color: variables.$active;
+
+        @include mixins.on-interaction {
+            color: variables.$text;
+            text-decoration: underline;
+        }
+    }
+
+    ul {
+        list-style: disc;
+    }
+
     /* stylelint-enable selector-max-type */
 }

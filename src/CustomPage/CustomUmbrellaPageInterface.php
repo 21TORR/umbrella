@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Torr\Umbrella\CustomPage;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * @final
  */
@@ -21,5 +23,5 @@ interface CustomUmbrellaPageInterface
 	/**
 	 * Renders the section
 	 */
-	public function render () : string;
+	public function render (Request $request) : string;
 }

@@ -2,6 +2,7 @@
 
 namespace Torr\Umbrella\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
@@ -173,6 +174,7 @@ final class UmbrellaController extends BaseController
 	public function customPage (
 		UmbrellaConfig $config,
 		CustomPagesRegistry $pagesRegistry,
+		Request $request,
 		string $key
 	)
 	{
@@ -186,6 +188,7 @@ final class UmbrellaController extends BaseController
 
 		return $this->render("@Umbrella/custom-page/custom-page.html.twig", [
 			"customPage" => $page,
+			"content" => $page->render($request),
 		]);
 	}
 }
