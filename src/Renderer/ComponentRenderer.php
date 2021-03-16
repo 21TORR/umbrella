@@ -11,18 +11,21 @@ final class ComponentRenderer
 	private ComponentLibraryLoader $libraryLoader;
 	private Environment $twig;
 	private ComponentPaths $paths;
+	private CodeIndenter $indenter;
 
 	/**
 	 */
 	public function __construct (
 		ComponentLibraryLoader $libraryLoader,
 		Environment $twig,
-		ComponentPaths $paths
+		ComponentPaths $paths,
+		CodeIndenter $indenter
 	)
 	{
 		$this->libraryLoader = $libraryLoader;
 		$this->twig = $twig;
 		$this->paths = $paths;
+		$this->indenter = $indenter;
 	}
 
 
@@ -43,10 +46,23 @@ final class ComponentRenderer
 	public function renderEmbedded (
 		string $category,
 		string $component,
-		array $variables = []
+		array $variables = [],
+		bool $commentOutput = false
 	) : string
 	{
-		return $this->render($category, $component, false, $variables);
+		return $this->render($category, $component, false, $variables, $commentOutput);
+	}
+
+	/**
+	 * Renders the beautified code
+	 */
+	public function renderForCodeView (
+		string $category,
+		string $component
+	) : string
+	{
+		$html = $this->render($category, $component, true, [], true);
+		return $this->indenter->indent($html);
 	}
 
 
@@ -56,17 +72,26 @@ final class ComponentRenderer
 		string $category,
 		string $component,
 		bool $standalone,
-		array $variables = []
+		array $variables = [],
+		bool $commentOutput = false
 	) : string
 	{
 		$library = $this->libraryLoader->loadLibrary();
 		$componentData = $library->getCategory($category)->getComponent($component);
 
-		return $this->twig->render(
+		$html = \trim($this->twig->render(
 			$this->paths->getTwigTemplatePath($componentData),
 			\array_replace($variables, [
 				"standalone" => $standalone,
+				"__umbrella_code_view" => $commentOutput,
 			])
-		);
+		));
+
+		if ($commentOutput && !$standalone)
+		{
+			return "<!-- Component {$category}/{$component} -->\n" . $html . "\n<!-- / End Component {$category}/{$component} -->";
+		}
+
+		return $html;
 	}
 }

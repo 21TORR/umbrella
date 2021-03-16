@@ -18,6 +18,7 @@
 		"21torr/html-builder": "^1.0",
 		"21torr/rad": "^1.0",
 		"league/commonmark": "^2.0@dev",
+		"schleuse/dindent": "^2.4",
 		"symfony/config": "^5.2",
 		"symfony/dependency-injection": "^5.2",
 		"symfony/finder": "^5.2",

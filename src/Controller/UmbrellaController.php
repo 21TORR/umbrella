@@ -41,6 +41,7 @@ final class UmbrellaController extends BaseController
 		ComponentLibraryLoader $libraryLoader,
 		UmbrellaConfig $config,
 		ComponentMetadata $metadata,
+		ComponentRenderer $componentRenderer,
 		string $category,
 		string $key
 	) : Response
@@ -64,6 +65,7 @@ final class UmbrellaController extends BaseController
 			"component" => $component,
 			"categories" => $library->getCategories(),
 			"docs" => $metadata->renderDocs($component),
+			"code" => $componentRenderer->renderForCodeView($category, $key),
 		]);
 	}
 
