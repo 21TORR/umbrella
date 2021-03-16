@@ -18,3 +18,6 @@ services:
         $templatesPath: '%kernel.project_dir%/templates'
         $layoutsDir: !abstract 'configuration value: umbrella.templates_directory'
         $docsDir: !abstract 'configuration value: umbrella.docs_directory'
+
+    Torr\Umbrella\Cache\ProductionCache:
+        $isDebug: '%kernel.debug%'

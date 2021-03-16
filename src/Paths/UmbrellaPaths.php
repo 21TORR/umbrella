@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Torr\Umbrella\Paths;
 
 use Torr\Umbrella\Data\ComponentData;
+use Torr\Umbrella\Data\Docs\DocsPage;
 
 final class UmbrellaPaths
 {
@@ -55,5 +56,12 @@ final class UmbrellaPaths
 	public function getLayoutsBaseDir () : string
 	{
 		return "{$this->templatesPath}/{$this->layoutsDir}";
+	}
+
+	/**
+	 */
+	public function getGlobalDocsFilePath (DocsPage $page) : string
+	{
+		return "{$this->getGlobalDocsDir()}/{$page->getKey()}.md";
 	}
 }
