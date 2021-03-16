@@ -7,10 +7,6 @@ services:
         resource: ../src/*
         exclude: ../src/{Data,Exception,UmbrellaBundle.php}
 
-    Torr\Umbrella\Component\Library\ComponentLibraryLoader:
-        $templatesDir: '%kernel.project_dir%/templates'
-        $subDir: !abstract 'configuration value: umbrella.templates_directory'
-
     Torr\Umbrella\Controller\UmbrellaController:
         bind:
             $profiler: '@?profiler'
@@ -20,3 +16,5 @@ services:
 
     Torr\Umbrella\Paths\UmbrellaPaths:
         $templatesPath: '%kernel.project_dir%/templates'
+        $layoutsDir: !abstract 'configuration value: umbrella.templates_directory'
+        $docsDir: !abstract 'configuration value: umbrella.docs_directory'

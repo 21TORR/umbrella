@@ -27,7 +27,7 @@ final class UmbrellaPaths
 	 */
 	public function getGlobalDocsDir () : string
 	{
-		return "{$this->templatesPath}/{$this->layoutsDir}/{$this->docsDir}";
+		return "{$this->getLayoutsBaseDir()}/{$this->docsDir}";
 	}
 
 
@@ -46,6 +46,14 @@ final class UmbrellaPaths
 	 */
 	public function getFullComponentDocsPath (ComponentData $component) : string
 	{
-		return "{$this->templatesPath}/{$this->layoutsDir}/{$component->toPath()}.md";
+		return "{$this->getLayoutsBaseDir()}/{$component->toPath()}.md";
+	}
+
+	/**
+	 * Returns the base dir where all the layouts are placed
+	 */
+	public function getLayoutsBaseDir () : string
+	{
+		return "{$this->templatesPath}/{$this->layoutsDir}";
 	}
 }

@@ -25,9 +25,6 @@ final class UmbrellaBundle extends Bundle
 			new UmbrellaBundleConfiguration(),
 			static function (array $config, ContainerBuilder $container) : void
 			{
-				$container->getDefinition(ComponentLibraryLoader::class)
-					->setArgument('$subDir', $config["templates_directory"]);
-
 				$container->getDefinition(PreviewManager::class)
 					->setArgument('$previewAssets', $config["assets"]);
 
