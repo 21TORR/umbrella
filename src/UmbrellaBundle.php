@@ -12,6 +12,7 @@ use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfiguration;
 use Torr\Umbrella\Paths\UmbrellaPaths;
 use Torr\Umbrella\Preview\PreviewManager;
+use Torr\Umbrella\CustomPage\CustomUmbrellaPageInterface;
 
 final class UmbrellaBundle extends Bundle
 {
@@ -47,6 +48,9 @@ final class UmbrellaBundle extends Bundle
 			"umbrella",
 			\dirname(__DIR__) . "/build"
 		));
+
+		$container->registerForAutoconfiguration(CustomUmbrellaPageInterface::class)
+			->addTag("umbrella.custom-page");
 	}
 
 

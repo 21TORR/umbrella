@@ -27,3 +27,19 @@
 		{%- endfor -%}
 	</ul>
 {% endif %}
+
+
+{% if customPages is not empty %}
+	<h1 class="navigation-headline">{{ "component.section.custom-pages" | trans({}, "umbrella") }}</h1>
+	<ul>
+		{% for customPage in customPages %}
+			<li>
+				{%- if customPage is same as (currentCustomPage) -%}
+					<strong>{{ customPage.title }}</strong>
+				{%- else -%}
+					<a href="{{ path("umbrella.page", {key: customPage.key}) }}">{{ customPage.title }}</a>
+				{%- endif -%}
+			</li>
+		{%- endfor -%}
+	</ul>
+{% endif %}
