@@ -5,10 +5,11 @@ namespace Torr\Umbrella\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
-use Torr\Umbrella\Component\ComponentMetadata;
+use Torr\Umbrella\Docs\ComponentMetadata;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\Data\ComponentData;
+use Torr\Umbrella\Docs\DocsPages;
 use Torr\Umbrella\Exception\UmbrellaDisabledException;
 use Torr\Umbrella\Preview\PreviewManager;
 use Torr\Umbrella\Renderer\ComponentRenderer;
@@ -116,10 +117,12 @@ final class UmbrellaController extends BaseController
 	 */
 	public function navigation (
 		ComponentLibraryLoader $libraryLoader,
+		DocsPages $docsPages,
 		?ComponentData $currentComponent
 	) : Response
 	{
 		$library = $libraryLoader->loadLibrary();
+		$docsPages->fetchDocsPages();
 
 		return $this->render("@Umbrella/navigation/navigation.html.twig", [
 			"categories" => $library->getCategories(),

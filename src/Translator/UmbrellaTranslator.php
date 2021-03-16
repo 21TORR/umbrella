@@ -10,10 +10,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UmbrellaTranslator
 {
 	private TranslatorInterface $translator;
+	private LabelGenerator $labelGenerator;
 
-	public function __construct (TranslatorInterface $translator)
+	public function __construct (
+		TranslatorInterface $translator,
+		LabelGenerator $labelGenerator
+	)
 	{
 		$this->translator = $translator;
+		$this->labelGenerator = $labelGenerator;
 	}
 
 
@@ -44,16 +49,6 @@ class UmbrellaTranslator
 
 		return $translated !== $id
 			? $translated
-			: $this->generateLabel($key);
-	}
-
-
-	/**
-	 */
-	private function generateLabel (string $key) : string
-	{
-		$key = \strtr($key, ["-" => " ", "_" => " "]);
-		$key = (string) \preg_replace('~\\s+~', ' ', $key);
-		return \ucfirst($key);
+			: $this->labelGenerator->generate($key);
 	}
 }

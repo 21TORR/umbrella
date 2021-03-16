@@ -11,7 +11,7 @@ final class ComponentRenderer
 	private ComponentLibraryLoader $libraryLoader;
 	private Environment $twig;
 	private ComponentPaths $paths;
-	private CodeIndenter $indenter;
+	private CodeFormatter $indenter;
 
 	/**
 	 */
@@ -19,7 +19,7 @@ final class ComponentRenderer
 		ComponentLibraryLoader $libraryLoader,
 		Environment $twig,
 		ComponentPaths $paths,
-		CodeIndenter $indenter
+		CodeFormatter $indenter
 	)
 	{
 		$this->libraryLoader = $libraryLoader;
@@ -62,7 +62,7 @@ final class ComponentRenderer
 	) : string
 	{
 		$html = $this->render($category, $component, true, [], true);
-		return $this->indenter->indent($html);
+		return $this->indenter->format($html);
 	}
 
 

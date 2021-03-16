@@ -5,7 +5,7 @@ namespace Torr\Umbrella\Renderer;
 
 use Gajus\Dindent\Indenter;
 
-final class CodeIndenter
+final class CodeFormatter
 {
 	private ?Indenter $indenter = null;
 
@@ -47,15 +47,14 @@ final class CodeIndenter
 			}
 		}
 
-		dump($this->indenter);
 		return $this->indenter;
 	}
 
 
 	/**
-	 * Indents the code
+	 * Formats the code
 	 */
-	public function indent (string $html) : string
+	public function format (string $html) : string
 	{
 		return $this->getIndenter()->indent($html);
 	}

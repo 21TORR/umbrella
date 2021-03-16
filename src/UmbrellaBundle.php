@@ -11,6 +11,7 @@ use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
 use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfiguration;
 use Torr\Umbrella\Paths\ComponentPaths;
+use Torr\Umbrella\Paths\UmbrellaPaths;
 use Torr\Umbrella\Preview\PreviewManager;
 
 final class UmbrellaBundle extends Bundle
@@ -33,6 +34,10 @@ final class UmbrellaBundle extends Bundle
 
 				$container->getDefinition(PreviewManager::class)
 					->setArgument('$previewAssets', $config["assets"]);
+
+				$container->getDefinition(UmbrellaPaths::class)
+					->setArgument('$layoutsDir', $config["templates_directory"])
+					->setArgument('$docsDir', $config["docs_directory"]);
 
 				$container->getDefinition(UmbrellaConfig::class)
 					->setArgument('$enabledInProduction', $config["enabled_in_production"]);
