@@ -31,7 +31,7 @@ final class CustomPagesRegistry
 	}
 
 	/**
-	 * @return CustomUmbrellaPageInterface
+	 * @return CustomUmbrellaPageInterface[]
 	 */
 	public function getAll () : array
 	{

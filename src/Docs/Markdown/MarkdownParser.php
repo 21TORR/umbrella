@@ -78,7 +78,7 @@ final class MarkdownParser
 			{
 				throw new InvalidFrontMatterException(\sprintf(
 					"Validation of front matter failed: %s",
-					(string) $violations
+					\method_exists($violations, "__toString") ? $violations->__toString() : "n/a"
 				));
 			}
 		}

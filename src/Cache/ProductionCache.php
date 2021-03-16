@@ -31,6 +31,6 @@ final class ProductionCache implements CacheInterface
 	 */
 	public function delete(string $key) : bool
 	{
-		$this->cache->delete($key);
+		return $this->cache->delete($key);
 	}
 }

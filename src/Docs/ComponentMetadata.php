@@ -79,6 +79,6 @@ final class ComponentMetadata
 			return null;
 		}
 
-		return \file_get_contents($filePath);
+		return (string) \file_get_contents($filePath);
 	}
 }
