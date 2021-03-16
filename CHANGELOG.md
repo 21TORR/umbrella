@@ -4,6 +4,9 @@
 *   (feature) Added docs for components.
 *   (improvement) Simplified internal implementation.
 *   (feature) Added per-component config (as front matter in docs).
+*   (feature) Add global docs.
+*   (feature) Add custom pages.
+*   (improvement) Add link to open component in new window.
 
 
 0.3.1
