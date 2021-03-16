@@ -7,12 +7,11 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Torr\Assets\Container\RegisterAssetNamespaceCompilerPass;
 use Torr\BundleHelpers\Bundle\ConfigurableBundleExtension;
-use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
+use Torr\Umbrella\CustomPage\CustomUmbrellaPageInterface;
 use Torr\Umbrella\DependencyInjection\UmbrellaBundleConfiguration;
 use Torr\Umbrella\Paths\UmbrellaPaths;
 use Torr\Umbrella\Preview\PreviewManager;
-use Torr\Umbrella\CustomPage\CustomUmbrellaPageInterface;
 
 final class UmbrellaBundle extends Bundle
 {

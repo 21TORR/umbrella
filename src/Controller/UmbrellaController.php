@@ -5,17 +5,17 @@ namespace Torr\Umbrella\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
-use Torr\Umbrella\Data\Docs\DocsPage;
-use Torr\Umbrella\Docs\ComponentMetadata;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
+use Torr\Umbrella\CustomPage\CustomPagesRegistry;
+use Torr\Umbrella\CustomPage\CustomUmbrellaPageInterface;
 use Torr\Umbrella\Data\ComponentData;
+use Torr\Umbrella\Data\Docs\DocsPage;
+use Torr\Umbrella\Docs\ComponentMetadata;
 use Torr\Umbrella\Docs\GlobalDocsLoader;
 use Torr\Umbrella\Exception\UmbrellaDisabledException;
 use Torr\Umbrella\Preview\PreviewManager;
 use Torr\Umbrella\Renderer\ComponentRenderer;
-use Torr\Umbrella\CustomPage\CustomPagesRegistry;
-use Torr\Umbrella\CustomPage\CustomUmbrellaPageInterface;
 
 final class UmbrellaController extends BaseController
 {

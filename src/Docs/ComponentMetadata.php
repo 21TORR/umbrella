@@ -48,7 +48,7 @@ final class ComponentMetadata
 			$assertions = new Collection([
 				"body" => [
 					new Type("string"),
-				]
+				],
 			]);
 
 			return $this->markdownParser->fetchFrontMatter(

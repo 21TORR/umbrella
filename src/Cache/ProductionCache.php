@@ -19,7 +19,7 @@ final class ProductionCache implements CacheInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
+	public function get(string $key, callable $callback, ?float $beta = null, ?array &$metadata = null)
 	{
 		return !$this->isDebug
 			? $this->cache->get($key, $callback, $beta, $metadata)

@@ -8,7 +8,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\Type;
-use Symfony\Contracts\Cache\CacheInterface;
 use Torr\Umbrella\Cache\ProductionCache;
 use Torr\Umbrella\Data\Docs\DocsPage;
 use Torr\Umbrella\Data\Docs\GlobalDocs;
@@ -130,7 +129,7 @@ final class GlobalDocsLoader implements CacheClearerInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function clear(string $cacheDir)
+	public function clear(string $cacheDir) : void
 	{
 		$this->globalDocs = null;
 		$this->cache->delete(self::CACHE_KEY);

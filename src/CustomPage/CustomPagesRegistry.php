@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Torr\Umbrella\Exception\CustomPage\InvalidCustomPageKeyException;
 use Torr\Umbrella\Exception\CustomPage\UnknownCustomPageException;
-use Torr\Umbrella\CustomPage\CustomUmbrellaPageInterface;
 
 final class CustomPagesRegistry
 {

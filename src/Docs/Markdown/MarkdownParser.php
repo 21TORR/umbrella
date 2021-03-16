@@ -10,7 +10,6 @@ use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\MarkdownConverter;
 use League\CommonMark\MarkdownConverterInterface;
 use Symfony\Component\Validator\Constraints\Collection;
-use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Validation;
 use Torr\Umbrella\Exception\Docs\InvalidFrontMatterException;
 
