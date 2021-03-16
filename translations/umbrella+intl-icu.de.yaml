@@ -8,6 +8,7 @@ category:
 component:
     section:
         docs: Docs
+        custom-pages: Spezialseiten
     view:
         open-preview: im neuen Fenster öffnen
     atom:

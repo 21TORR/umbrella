@@ -10,7 +10,6 @@ use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\MarkdownConverter;
 use League\CommonMark\MarkdownConverterInterface;
 use Symfony\Component\Validator\Constraints\Collection;
-use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Validation;
 use Torr\Umbrella\Exception\Docs\InvalidFrontMatterException;
 
@@ -79,7 +78,7 @@ final class MarkdownParser
 			{
 				throw new InvalidFrontMatterException(\sprintf(
 					"Validation of front matter failed: %s",
-					(string) $violations
+					\method_exists($violations, "__toString") ? $violations->__toString() : "n/a"
 				));
 			}
 		}

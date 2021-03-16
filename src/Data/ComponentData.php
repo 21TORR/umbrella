@@ -7,7 +7,7 @@ final class ComponentData
 	private string $key;
 	private string $label;
 	private bool $hidden;
-	private CategoryData $category;
+	private ?CategoryData $category = null;
 
 	/**
 	 */

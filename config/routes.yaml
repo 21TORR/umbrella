@@ -16,9 +16,14 @@ umbrella.preview:
         category: '[a-z0-9][a-z0-9-_]*'
         key: '[a-z0-9][a-z0-9-_]*'
 
-
 umbrella.docs:
     path: /_d/{key}
     controller: Torr\Umbrella\Controller\UmbrellaController::globalDocs
+    requirements:
+        key: '[a-z0-9][a-z0-9-_]*'
+
+umbrella.page:
+    path: /_p/{key}
+    controller: Torr\Umbrella\Controller\UmbrellaController::customPage
     requirements:
         key: '[a-z0-9][a-z0-9-_]*'

@@ -5,11 +5,13 @@ namespace Torr\Umbrella\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
-use Torr\Umbrella\Data\Docs\DocsPage;
-use Torr\Umbrella\Docs\ComponentMetadata;
 use Torr\Umbrella\Component\Library\ComponentLibraryLoader;
 use Torr\Umbrella\Config\UmbrellaConfig;
+use Torr\Umbrella\CustomPage\CustomPagesRegistry;
+use Torr\Umbrella\CustomPage\CustomUmbrellaPageInterface;
 use Torr\Umbrella\Data\ComponentData;
+use Torr\Umbrella\Data\Docs\DocsPage;
+use Torr\Umbrella\Docs\ComponentMetadata;
 use Torr\Umbrella\Docs\GlobalDocsLoader;
 use Torr\Umbrella\Exception\UmbrellaDisabledException;
 use Torr\Umbrella\Preview\PreviewManager;
@@ -119,17 +121,21 @@ final class UmbrellaController extends BaseController
 	public function navigation (
 		ComponentLibraryLoader $libraryLoader,
 		GlobalDocsLoader $docsLoader,
+		CustomPagesRegistry $customPages,
 		?ComponentData $currentComponent,
-		?DocsPage $currentDocsPage
+		?DocsPage $currentDocsPage,
+		?CustomUmbrellaPageInterface $currentCustomPage,
 	) : Response
 	{
 		$library = $libraryLoader->loadLibrary();
 
 		return $this->render("@Umbrella/navigation/navigation.html.twig", [
 			"categories" => $library->getCategories(),
+			"docs" => $docsLoader->load()->getAll(),
+			"customPages" => $customPages->getAll(),
 			"currentComponent" => $currentComponent,
 			"currentDocsPage" => $currentDocsPage,
-			"docs" => $docsLoader->load()->getAll(),
+			"currentCustomPage" => $currentCustomPage,
 		]);
 	}
 
@@ -160,6 +166,26 @@ final class UmbrellaController extends BaseController
 		return $this->render("@Umbrella/docs/docs.html.twig", [
 			"docsPage" => $page,
 			"content" => $docsLoader->getRenderedDocsPageContent($page),
+		]);
+	}
+
+
+	public function customPage (
+		UmbrellaConfig $config,
+		CustomPagesRegistry $pagesRegistry,
+		string $key
+	)
+	{
+		if (!$config->isEnabled())
+		{
+			throw new UmbrellaDisabledException();
+		}
+
+		$page = $pagesRegistry->get($key);
+
+
+		return $this->render("@Umbrella/custom-page/custom-page.html.twig", [
+			"customPage" => $page,
 		]);
 	}
 }

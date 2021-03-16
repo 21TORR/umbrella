@@ -1,0 +1,6 @@
+includes:
+    - vendor-bin/test/vendor/21torr/php-cs/phpstan/lib.neon
+
+parameters:
+    ignoreErrors:
+        - '#Gajus\\Dindent\\Indenter::setElementType\(\)#'

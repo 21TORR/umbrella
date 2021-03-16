@@ -5,7 +5,7 @@ namespace Torr\Umbrella\Data\Docs;
 
 final class GlobalDocs
 {
-	/** @var array<string, DocsPage>  */
+	/** @var array<string, DocsPage> */
 	private array $docs;
 
 	/**
