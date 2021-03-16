@@ -1,11 +1,36 @@
 {% extends "@Umbrella/base.html.twig" %}
 
+{%- trans_default_domain "umbrella" -%}
+
+{%- block assets -%}
+	{{- parent() -}}
+	{{- assets_include([
+		"@umbrella/vendor/prism.css",
+		"@umbrella/vendor/prism.js",
+	]) -}}
+{%- endblock -%}
+
+
 {%- block content -%}
-	<iframe class="site-preview shadow-sm" src="{{ path("umbrella.preview", {category: category.key, key: component.key}) }}"></iframe>
-	{% if docs %}
-		<div class="site-docs content">
-			<h2 class="h2">{{ component.label }}</h2>
-			{{- docs | raw -}}
+	<iframe class="site-preview" src="{{ path("umbrella.preview", {category: component.category.key, key: component.key}) }}"></iframe>
+	<div class="site-preview-link">
+		<a href="{{ path("umbrella.preview", {category: component.category.key, key: component.key}) }}" target="_blank">
+			<span class="icon icon-external">{{- asset_embed("@umbrella/icon/external.svg") -}}</span>
+			{{- "component.view.open-preview" | trans -}}
+		</a>
+	</div>
+	<div class="site-docs">
+		<h1 class="h1 docs-headline">{{ component.label }}</h1>
+		<div class="docs-code">
+			<div class="docs-window">
+				<pre><code class="language-html">{{ code }}</code></pre>
+			</div>
 		</div>
-	{% endif %}
+
+		{%- if docs -%}
+			<div class="docs-text content">
+				{{- docs | raw -}}
+			</div>
+		{%- endif -%}
+	</div>
 {%- endblock -%}

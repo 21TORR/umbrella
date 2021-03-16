@@ -12,16 +12,20 @@
 	],
 	"require": {
 		"php": "^7.4 || ^8.0",
-		"21torr/assets": "^0.1.0",
+		"21torr/assets": "^1.0",
 		"21torr/bundle-helpers": "^2.0",
 		"21torr/hosting": "^1.0",
 		"21torr/html-builder": "^1.0",
 		"21torr/rad": "^1.0",
+		"league/commonmark": "^2.0@dev",
+		"schleuse/dindent": "^2.4",
 		"symfony/config": "^5.2",
 		"symfony/dependency-injection": "^5.2",
 		"symfony/finder": "^5.2",
 		"symfony/http-kernel": "^5.2",
 		"symfony/translation-contracts": "^2.3",
+		"symfony/validator": "^5.2",
+		"symfony/yaml": "^5.2",
 		"twig/twig": "^3.1"
 	},
 	"require-dev": {

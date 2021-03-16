@@ -1,4 +1,5 @@
 @use "../helper/mixins";
+@use "../helper/placeholders";
 
 html,
 body {
@@ -8,4 +9,20 @@ body {
 body {
     min-height: 100%;
     font-size: 1.6rem;
+}
+
+.h1 {
+    @extend %h1;
+}
+
+.h2 {
+    @extend %h2;
+}
+
+.h3 {
+    @extend %h3;
+}
+
+.h4 {
+    @extend %h4;
 }

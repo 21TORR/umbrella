@@ -7,6 +7,7 @@ final class ComponentData
 	private string $key;
 	private string $label;
 	private bool $hidden;
+	private CategoryData $category;
 
 	/**
 	 */
@@ -36,5 +37,27 @@ final class ComponentData
 	public function isHidden () : bool
 	{
 		return $this->hidden;
+	}
+
+	/**
+	 */
+	public function getCategory() : CategoryData
+	{
+		return $this->category;
+	}
+
+	/**
+	 * @internal
+	 */
+	public function setCategory (CategoryData $category) : void
+	{
+		$this->category = $category;
+	}
+
+	/**
+	 */
+	public function toPath () : string
+	{
+		return "{$this->getCategory()->getKey()}/{$this->key}";
 	}
 }

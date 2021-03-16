@@ -1,0 +1,6 @@
+@use "../helper/mixins";
+
+pre[class*="language-"] {
+	@include mixins.code-font;
+	border-radius: .5rem;
+}

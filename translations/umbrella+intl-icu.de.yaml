@@ -2,8 +2,11 @@ category:
     atom: Atome
     molecule: Moleküle
     organism: Organismen
+    basics: Basics
 
 
 component:
+    view:
+        open-preview: im neuen Fenster öffnen
     atom:
         test: Test 123

@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Torr\Umbrella\Exception;
+namespace Torr\Umbrella\Exception\Component;
 
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Torr\Umbrella\Exception\UmbrellaException;
 
 final class MissingComponentException extends \InvalidArgumentException implements UmbrellaException, HttpExceptionInterface
 {

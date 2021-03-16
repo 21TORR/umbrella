@@ -7,27 +7,25 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Torr\Umbrella\Data\CategoryData;
 use Torr\Umbrella\Data\ComponentData;
+use Torr\Umbrella\Paths\UmbrellaPaths;
 use Torr\Umbrella\Translator\UmbrellaTranslator;
 
 final class ComponentLibraryLoader
 {
-	private string $templatesDir;
-	private string $baseDir;
 	private UmbrellaTranslator $translator;
 	private ?Stopwatch $stopwatch;
 	private ?ComponentLibrary $library = null;
+	private UmbrellaPaths $paths;
 
 	public function __construct (
 		UmbrellaTranslator $translator,
+		UmbrellaPaths $paths,
 		?Stopwatch $stopwatch,
-		string $templatesDir,
-		string $subDir
 	)
 	{
-		$this->translator = $translator;
-		$this->templatesDir = \trim($subDir, "/");
-		$this->baseDir = \rtrim($templatesDir, "/") . "/{$this->templatesDir}";
 		$this->stopwatch = $stopwatch;
+		$this->translator = $translator;
+		$this->paths = $paths;
 	}
 
 
@@ -56,7 +54,7 @@ final class ComponentLibraryLoader
 			}
 
 			$finder = Finder::create()
-				->in($this->baseDir)
+				->in($this->paths->getLayoutsBaseDir())
 				->files()
 				->ignoreDotFiles(true)
 				->ignoreUnreadableDirs()
@@ -75,17 +73,11 @@ final class ComponentLibraryLoader
 				$this->stopwatch->stop("Umbrella: load library");
 			}
 
-			return new ComponentLibrary(
-				$this->templatesDir,
-				$categories
-			);
+			return new ComponentLibrary($categories);
 		}
 		catch (DirectoryNotFoundException $exception)
 		{
-			return new ComponentLibrary(
-				$this->templatesDir,
-				[]
-			);
+			return new ComponentLibrary([]);
 		}
 	}
 

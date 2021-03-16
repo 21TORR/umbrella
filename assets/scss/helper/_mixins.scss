@@ -1,1 +1,107 @@
 @forward "~@21torr/atlantis/mixins";
+
+@mixin content ($base) {
+    /* stylelint-disable selector-max-type */
+    // region Headline bottom spacing
+    // must be at the top, as headline on headline will overwrite this
+    // later on.
+    > .h1,
+    > .h2 {
+        + * {
+            margin-top: 2 * $base;
+        }
+    }
+
+    > .h3,
+    > .h4,
+    > .h5,
+    > .h6 {
+        + * {
+            margin-top: $base;
+        }
+    }
+    // endregion
+
+    // region Default block elements
+    > * {
+        // set default margin
+        + * {
+            margin-top: 2 * $base;
+        }
+
+        // reset margins for inline elements
+        + a,
+        + abbr,
+        + acronym,
+        + b,
+        + bdo,
+        + big,
+        + br,
+        + cite,
+        + code,
+        + dfn,
+        + em,
+        + i,
+        + img,
+        + kbd,
+        + map,
+        + object,
+        + q,
+        + samp,
+        + small,
+        + span,
+        + strong,
+        + sub,
+        + sup,
+        + tt,
+        + var {
+            margin-top: 0;
+        }
+
+        // region Headline Top Spacing
+        // must be below the `.hX + *` declarations at the top,
+        // because it needs to overwrite these
+        + .h1 {
+            margin-top: 10 * $base;
+        }
+
+        + .h2 {
+            margin-top: 4 * $base;
+        }
+
+        + .h3,
+        + .h4,
+        + .h5,
+        + .h6 {
+            margin-top: 2 * $base;
+        }
+        // endregion
+    }
+    // endregion
+
+    // reset margin for default buttons
+    > .button + .button {
+        margin-top: 0;
+    }
+
+    // region Lists
+    ul,
+    ol {
+        margin-left: 2 * $base;
+    }
+
+    ul {
+        list-style: disc;
+    }
+
+    ol {
+        list-style: decimal;
+    }
+    // endregion
+    /* stylelint-enable selector-max-type */
+}
+
+
+@mixin code-font {
+    font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+}
