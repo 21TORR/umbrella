@@ -16,13 +16,13 @@
 	</ul>
 {%- endfor -%}
 
-{% if docs is not empty %}
+{%- if docs is not empty -%}
 	<h1 class="navigation-headline">
 		<span class="icon icon-docs">{{ asset_embed("@umbrella/icon/docs.svg") }}</span>
 		{{- "component.section.docs" | trans({}, "umbrella") -}}
 	</h1>
 	<ul>
-		{% for doc in docs %}
+		{%- for doc in docs -%}
 			<li>
 				{%- if doc is same as (currentDocsPage) -%}
 					<strong>{{ doc.title }}</strong>
@@ -32,16 +32,16 @@
 			</li>
 		{%- endfor -%}
 	</ul>
-{% endif %}
+{%- endif -%}
 
 
-{% if customPages is not empty %}
+{%- if customPages is not empty -%}
 	<h1 class="navigation-headline">
 		<span class="icon icon-custom-page">{{ asset_embed("@umbrella/icon/custom-page.svg") }}</span>
 		{{- "component.section.custom-pages" | trans({}, "umbrella") -}}
 	</h1>
 	<ul>
-		{% for customPage in customPages %}
+		{%- for customPage in customPages -%}
 			<li>
 				{%- if customPage is same as (currentCustomPage) -%}
 					<strong>{{ customPage.title }}</strong>
@@ -51,4 +51,4 @@
 			</li>
 		{%- endfor -%}
 	</ul>
-{% endif %}
+{%- endif -%}
