@@ -1,3 +1,9 @@
+1.0.2
+=====
+
+*   (bug) Re-add accidentally removed whitespace in title.
+
+
 1.0.1
 =====
 
