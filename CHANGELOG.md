@@ -1,3 +1,9 @@
+1.0.1
+=====
+
+*   (improvement) Allow `21torr/assets ^2.0`.
+
+
 1.0.0
 =====
 
