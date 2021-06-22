@@ -84,6 +84,7 @@ final class UmbrellaController extends BaseController
 		UmbrellaConfig $config,
 		ComponentMetadata $metadata,
 		?Profiler $profiler,
+		Request $request,
 		string $category,
 		string $key
 	) : Response
@@ -93,7 +94,7 @@ final class UmbrellaController extends BaseController
 			throw new UmbrellaDisabledException();
 		}
 
-		if (null !== $profiler)
+		if (null !== $profiler && $request->query->has("embedded"))
 		{
 			$profiler->disable();
 		}

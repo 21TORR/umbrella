@@ -3,7 +3,7 @@
 {%- trans_default_domain "umbrella" -%}
 
 {%- block content -%}
-	<iframe class="site-preview" src="{{ path("umbrella.preview", {category: component.category.key, key: component.key}) }}"></iframe>
+	<iframe class="site-preview" src="{{ path("umbrella.preview", {category: component.category.key, key: component.key, embedded: true}) }}"></iframe>
 	<div class="site-preview-link">
 		<a href="{{ path("umbrella.preview", {category: component.category.key, key: component.key}) }}" target="_blank">
 			<span class="icon icon-external">{{- asset_embed("@umbrella/icon/external.svg") -}}</span>
