@@ -9,7 +9,5 @@ Installation
 
 
 ```bash
-composer require 21torr/umbrella league/commonmark:"^2.0@dev"
+composer require 21torr/umbrella
 ```
-
-> As soon as `league/commonmark` has a stable 2.0 release, you can remove the second package.

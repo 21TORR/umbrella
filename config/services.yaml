@@ -24,3 +24,6 @@ services:
 
     Torr\Umbrella\CustomPage\CustomPagesRegistry:
         $pages: !tagged_locator { tag: umbrella.custom-page, default_index_method: getKey }
+
+    Torr\Umbrella\StaticExport\Exporter\StaticSiteExporter:
+        $projectDir: '%kernel.project_dir%'
