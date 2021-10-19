@@ -3,6 +3,7 @@
 namespace Torr\Umbrella\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Torr\Rad\Controller\BaseController;
@@ -20,6 +21,8 @@ use Torr\Umbrella\Renderer\ComponentRenderer;
 
 final class UmbrellaController extends BaseController
 {
+	public const REQUEST_ATTRIBUTE_HIDE_CUSTOM_PAGES = "_umbrella_hide_custom_section";
+
 	/**
 	 */
 	public function index (
@@ -127,14 +130,20 @@ final class UmbrellaController extends BaseController
 		?ComponentData $currentComponent,
 		?DocsPage $currentDocsPage,
 		?CustomUmbrellaPageInterface $currentCustomPage,
+		RequestStack $requestStack
 	) : Response
 	{
 		$library = $libraryLoader->loadLibrary();
 
+		$masterRequest = $requestStack->getMasterRequest();
+		$custom = null === $masterRequest || !$masterRequest->attributes->get(self::REQUEST_ATTRIBUTE_HIDE_CUSTOM_PAGES)
+			? $customPages->getAll()
+			: [];
+
 		return $this->render("@Umbrella/navigation/navigation.html.twig", [
 			"categories" => $library->getCategories(),
 			"docs" => $docsLoader->load()->getAll(),
-			"customPages" => $customPages->getAll(),
+			"customPages" => $custom,
 			"currentComponent" => $currentComponent,
 			"currentDocsPage" => $currentDocsPage,
 			"currentCustomPage" => $currentCustomPage,
