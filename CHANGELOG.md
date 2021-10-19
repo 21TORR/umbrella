@@ -1,3 +1,9 @@
+1.1.0
+=====
+
+* (feature) Add static site export.
+
+
 1.0.3
 =====
 
